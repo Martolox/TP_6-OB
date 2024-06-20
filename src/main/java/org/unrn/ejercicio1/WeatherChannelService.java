@@ -5,13 +5,9 @@ import org.unrn.ejercicio2.Registro;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class WeatherChannelService implements ClimaOnline {
-    private List<Registro> lista;
-
-    public WeatherChannelService() {
-        lista = new ArrayList<Registro>();
-    }
 
     public float getTempOpenWeather() {
 //        HttpRequest request = HttpRequest.newBuilder()
@@ -38,18 +34,6 @@ public class WeatherChannelService implements ClimaOnline {
         JSONObject jo = new JSONObject(st);
         JSONObject jo2 = new JSONObject(jo.get("main").toString());
         return (jo2.getInt("temp") - 273.15f);
-    }
-
-    @Override
-    public void suscribir(Registro registro) {
-        lista.add(registro);
-    }
-
-    @Override
-    public void notificar() {
-        for (Registro reg : lista) {
-            reg.actualizar();
-        }
     }
 
     @Override

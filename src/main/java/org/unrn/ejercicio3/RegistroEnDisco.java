@@ -1,15 +1,17 @@
 package org.unrn.ejercicio3;
 
+import org.unrn.ejercicio1.ClimaOnline;
+import org.unrn.ejercicio1.Medidor;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class RegistroEnDisco implements ClimaOnline {
-    private ClimaOnline clima;
+public class RegistroEnDisco extends Registro {
 
-    public RegistroEnDisco(ClimaOnline clima) {
-        this.clima = clima;
+    public RegistroEnDisco(ClimaOnline clima, Medidor medidor) {
+        super(clima, medidor);
     }
 
     private String getFecha() {
@@ -19,7 +21,7 @@ public class RegistroEnDisco implements ClimaOnline {
 
     @Override
     public int temperatura() {
-        int temp = clima.temperatura();
+        int temp = medidor.getTemperatura();
         try {
             FileWriter writer = new FileWriter("src/main/resources/temp.txt");
             writer.write("%s - Temperatura: %d °C".formatted(getFecha(), temp));
